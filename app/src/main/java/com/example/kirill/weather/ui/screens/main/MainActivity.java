@@ -1,4 +1,4 @@
-package com.example.kirill.weather;
+package com.example.kirill.weather.ui.screens.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.kirill.weather.R;
 
 public class MainActivity extends AppCompatActivity {
 
