@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.example.kirill.weather.AppComponent;
 
 import javax.inject.Inject;
 
@@ -40,8 +39,6 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
     protected void onExtractParams(@NonNull Bundle params) {
         // default no implementation
     }
-
-    protected abstract void onCreateComponent(AppComponent appComponent);
 
     protected abstract Navigator navigator();
 
