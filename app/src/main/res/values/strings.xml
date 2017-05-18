@@ -3,5 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="locale">en-GB</string>
+    <string name="error_api">Service is temporarily unavailable</string>
+    <string name="error_api_network_disabled">Check your internet connection</string>
 
 </resources>

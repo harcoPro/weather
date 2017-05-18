@@ -1,17 +1,18 @@
 package com.example.kirill.weather.data.api.weather;
 
-public class WeatherApiError extends Throwable {
+import android.content.res.Resources;
 
-    public Integer errorCode;
-    public String msg;
+import com.example.kirill.weather.data.api.ApiError;
 
-    public WeatherApiError(String msg) {
-        this(0, msg);
-    }
+public class WeatherApiError extends ApiError {
 
     public WeatherApiError(Integer errorCode, String msg) {
-        this.msg = msg;
-        this.errorCode = errorCode;
+        super(errorCode, msg);
+    }
+
+    public static ApiError from(int code, Resources resources) {
+        //TODO(k.s) Implement handling Weather api error here
+        return ApiError.from(code, resources);
     }
 
 }
