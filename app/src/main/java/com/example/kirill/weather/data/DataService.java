@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.example.kirill.weather.ApplicationScope;
 import com.example.kirill.weather.data.api.weather.WeatherService;
-import com.example.kirill.weather.data.api.weather.models.ResponseWeatherByCityName;
+import com.example.kirill.weather.data.api.weather.models.WeatherByCityNameResponse;
 
 import javax.inject.Inject;
 
@@ -25,7 +25,7 @@ public class DataService {
         this.weatherService = weatherService;
     }
 
-    public Observable<ResponseWeatherByCityName> getWeatherByCity(@NonNull String city) {
+    public Observable<WeatherByCityNameResponse> getWeatherByCity(@NonNull String city) {
         return weatherService
                 .getWeatherByCityName(city)
                 ;

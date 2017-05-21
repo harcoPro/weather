@@ -2,7 +2,7 @@ package com.example.kirill.weather.data.api.weather.models;
 
 import java.util.List;
 
-public class ResponseWeatherByCityName extends ResponseApi {
+public class WeatherByCityNameResponse extends WeatherResponse {
 
     public RestCoord coord;
     public List<RestWeather> weather;
