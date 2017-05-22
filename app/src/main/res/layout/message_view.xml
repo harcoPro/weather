@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.kirill.weather.ui.misc.MessageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:id="@+id/message_view"
+    android:visibility="gone"
+    >
+
+    <!-- Message -->
+    <TextView
+        android:id="@+id/message_view_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/message_view_text_size"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <!-- Refresh -->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/message_view_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_view_refresh"
+        />
+
+
+</com.example.kirill.weather.ui.misc.MessageView>

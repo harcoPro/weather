@@ -1,23 +1,25 @@
 package com.example.kirill.weather.ui.screens.first;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.kirill.weather.R;
+import com.example.kirill.weather.ui.misc.MessageView;
+import com.example.kirill.weather.ui.models.WeatherWithImage;
 import com.example.kirill.weather.ui.mvp.BaseActivity;
+import com.squareup.picasso.Picasso;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.commands.Command;
 
@@ -26,6 +28,10 @@ public class FirstActivity extends BaseActivity implements FirstView {
     @BindView(R.id.fab)                             FloatingActionButton            fab;
     @BindView(R.id.first_screen_recycler_view)      RecyclerView                    recyclerView;
     @BindView(R.id.first_screen_city_image)         ImageView                       cityImage;
+
+    @BindView(R.id.message_view)                    MessageView                     messageView;
+    @BindView(R.id.smoke_view)                      View                            smoke;
+    @BindView(R.id.first_screen_content)            View                            content;
 
     @InjectPresenter FirstPresenter presenter;
 
@@ -38,7 +44,7 @@ public class FirstActivity extends BaseActivity implements FirstView {
 
     @ProvidePresenter
     FirstPresenter provideFirstPresenter() {
-        return new FirstPresenter(new RxPermissions(this));
+        return new FirstPresenter(new RxPermissions(this), new ReactiveLocationProvider(this));
     }
 
     @Override
@@ -57,55 +63,25 @@ public class FirstActivity extends BaseActivity implements FirstView {
         return navigator;
     }
 
-
-    @OnClick(R.id.find_weather)
-    void findWeather() {
-        presenter.loadWeather();
-    }
-
-
     @Override
-    public void startObtainPermissions() {
-
+    public void startObtainUserWeather() {
+        smoke.setVisibility(View.VISIBLE);
+        content.setVisibility(View.GONE);
+        messageView.setVisibility(View.GONE);
     }
 
     @Override
-    public void finishObtainPermissions() {
-
+    public void finishObtainUserWeather() {
+        smoke.setVisibility(View.GONE);
     }
 
     @Override
-    public void permissionObtainFaled() {
+    public void obtainUserWeatherSuccess(WeatherWithImage weather) {
 
     }
 
     @Override
-    public void startObtainLocation() {
-
-    }
-
-    @Override
-    public void finishObtainLocation() {
-
-    }
-
-    @Override
-    public void obtainLocationSuccessful(Location location) {
-
-    }
-
-    @Override
-    public void obtainLocationFaled(Integer message) {
-
-    }
-
-    @Override
-    public void showFormError(Integer cityError) {
-
-    }
-
-    @Override
-    public void hideFormError() {
+    public void obtainUserWeatherFail(String message) {
 
     }
 }

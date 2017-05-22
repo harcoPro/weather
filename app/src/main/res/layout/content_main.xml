@@ -9,24 +9,34 @@
     tools:context="com.example.kirill.weather.ui.screens.first.FirstActivity"
     tools:showIn="@layout/activity_main">
 
-
-    <ImageView
-        android:id="@+id/first_screen_city_image"
+    <LinearLayout
+        android:id="@+id/first_screen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
+        <ImageView
+            android:id="@+id/first_screen_city_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/first_screen_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/smoke_view"
         />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/first_screen_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <Button
-        android:id="@+id/find_weather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <include
+        layout="@layout/message_view"
         />
 
 </FrameLayout>

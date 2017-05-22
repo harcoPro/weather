@@ -6,4 +6,6 @@
     <string name="error_api">Service is temporarily unavailable</string>
     <string name="error_api_network_disabled">Check your internet connection</string>
 
+    <string name="message_view_refresh">Refresh</string>
+
 </resources>

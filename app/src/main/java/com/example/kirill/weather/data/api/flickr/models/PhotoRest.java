@@ -12,7 +12,4 @@ public class PhotoRest {
         this.id = id;
     }
 
-
-
-
 }

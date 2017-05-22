@@ -1,3 +1,8 @@
 <resources>
+
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="message_view_text_size">16sp</dimen>
+    <dimen name="first_screen_image_height">200dp</dimen>
+
+
 </resources>

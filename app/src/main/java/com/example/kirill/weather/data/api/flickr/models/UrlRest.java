@@ -1,7 +1,6 @@
 package com.example.kirill.weather.data.api.flickr.models;
 
 
-import com.google.gson.annotations.SerializedName;
 import com.squareup.moshi.Json;
 
 import java.util.List;
