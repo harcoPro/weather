@@ -1,16 +1,15 @@
 package com.example.kirill.weather.data.api.flickr.models;
 
 
-import com.google.gson.annotations.SerializedName;
+import com.squareup.moshi.Json;
 
-import java.util.List;
 
 public class InfoRest {
 
-    @SerializedName("urls")
-    public final List<UrlRest> urls;
+    @Json(name = "urls")
+    public final UrlsRest urlsRest;
 
-    public InfoRest(List<UrlRest> urls) {
-        this.urls = urls;
+    public InfoRest(UrlsRest urlsRest) {
+        this.urlsRest = urlsRest;
     }
 }

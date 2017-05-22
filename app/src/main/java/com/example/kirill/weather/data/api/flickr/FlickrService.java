@@ -10,10 +10,10 @@ import rx.Observable;
 
 public interface FlickrService {
 
-    @GET("/rest/?method=flickr.photos.search")
+    @GET("/services/rest/?method=flickr.photos.search")
     Observable<SearchResponse> search(@Query("text") String city);
 
-    @GET("/rest/?method=flickr.photos.getInfo")
-    Observable<InfoResponse> info(@Query("photo_id") Integer photoId);
+    @GET("/services/rest/?method=flickr.photos.getInfo")
+    Observable<InfoResponse> info(@Query("photo_id") String photoId);
 
 }

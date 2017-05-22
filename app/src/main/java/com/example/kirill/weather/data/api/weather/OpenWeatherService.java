@@ -9,7 +9,7 @@ import rx.Observable;
 
 public interface OpenWeatherService {
 
-    @GET("/weather")
+    @GET("data/2.5/weather")
     Observable<WeatherByCityNameResponse>
     getWeatherByCityName(@Query("q")   String city);
 

@@ -16,9 +16,6 @@ public class BasePresenter<View extends MvpView> extends MvpPresenter<View> {
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
     @Inject
-    protected Bus bus;
-
-    @Inject
     protected Router router;
 
     protected void unsubscribeOnDestroy(@NonNull Subscription subscription) {

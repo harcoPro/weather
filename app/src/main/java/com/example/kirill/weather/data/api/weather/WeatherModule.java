@@ -29,7 +29,7 @@ import static android.provider.Settings.System.DATE_FORMAT;
 @Module
 public class WeatherModule {
 
-    private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/";
+    private static final String WEATHER_URL = "http://api.openweathermap.org/";
     public static final String API_KEY = "df45f890a0b873e8ffea573ef07339b6";
     public static final String APP_ID = "APPID";
     public static final String LANG = "lang";
@@ -48,7 +48,7 @@ public class WeatherModule {
     @ApplicationScope
     @WeatherQualifier
     Gson provideGson() {
-        return new GsonBuilder().setDateFormat(DATE_FORMAT).create();
+        return new GsonBuilder().create();
     }
 
     @Provides
@@ -101,8 +101,8 @@ public class WeatherModule {
 
     @Provides
     @ApplicationScope
-    WeatherService provideWeatherService(@WeatherQualifier Retrofit retrofit) {
-        return retrofit.create(WeatherService.class);
+    OpenWeatherService provideWeatherService(@WeatherQualifier Retrofit retrofit) {
+        return retrofit.create(OpenWeatherService.class);
     }
 
 }

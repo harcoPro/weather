@@ -13,8 +13,8 @@ import ru.terrakok.cicerone.NavigatorHolder;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
-    @Inject
-    NavigatorHolder navigatorHolder;
+//    @Inject
+//    NavigatorHolder navigatorHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +26,13 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
 
     @Override
     protected void onResume() {
-        navigatorHolder.setNavigator(navigator());
+//        navigatorHolder.setNavigator(navigator());
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        navigatorHolder.removeNavigator();
+//        navigatorHolder.removeNavigator();
         super.onPause();
     }
 

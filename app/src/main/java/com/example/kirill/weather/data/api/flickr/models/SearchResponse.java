@@ -1,14 +1,14 @@
 package com.example.kirill.weather.data.api.flickr.models;
 
 
-import com.google.gson.annotations.SerializedName;
+import com.squareup.moshi.Json;
 
 public class SearchResponse extends FlickrResponse {
 
-    @SerializedName("photos")
-    public final PhotoRest photos;
+    @Json(name = "photos")
+    public final PhotosRest photos;
 
-    public SearchResponse(String status, Integer code, String message, PhotoRest photos) {
+    public SearchResponse(String status, Integer code, String message, PhotosRest photos) {
         super(status, code, message);
         this.photos = photos;
     }

@@ -13,6 +13,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            debuggable true
+        }
+
         release {
             debuggable true
             minifyEnabled false
@@ -56,6 +60,7 @@ dependencies {
     // rest
     compile "com.squareup.retrofit2:retrofit:$retrofit"
     compile "com.squareup.retrofit2:converter-gson:$retrofit"
+    compile "com.squareup.retrofit2:converter-moshi:$retrofit"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofit"
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -68,7 +73,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
 
     // Permissions
-    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
 
     annotationProcessor "com.arello-mobile:moxy-compiler:$moxy"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"

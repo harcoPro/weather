@@ -9,6 +9,7 @@ import com.example.kirill.weather.data.api.weather.WeatherService;
 import com.example.kirill.weather.data.preferences.qualifiers.LocaleQualifier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.moshi.Moshi;
 
 import java.io.IOException;
 
@@ -26,17 +27,19 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 
 import static android.provider.Settings.System.DATE_FORMAT;
 
 @Module
 public class FlickrApiModule {
 
-    private static final String FLICKR_URL = "https://api.flickr.com/services/";
+    private static final String FLICKR_URL = "https://api.flickr.com/";
     private static final String FLICKR_KEY = "577d1193f73f7909486aec520de3cdb8";
     private static final String API_KEY = "api_key";
     private static final String FORMAT = "format";
     private static final String JSON = "json";
+    private static final String NO_JSON_CALLBACK = "nojsoncallback";
 
 
     public static final int CACHE_SIZE = 10 * 1024 * 1024;      //10 Mib
@@ -51,22 +54,17 @@ public class FlickrApiModule {
     @Provides
     @ApplicationScope
     @FlickrQualifier
-    Gson provideGson() {
-        return new GsonBuilder().create();
+    Moshi provideMoshi() {
+        return new Moshi.Builder().build();
     }
+
 
     @Provides
     @ApplicationScope
     @FlickrQualifier
-    OkHttpClient provideSimpleClient(@FlickrQualifier Cache cache, @LocaleQualifier String locale) {
+    OkHttpClient provideSimpleClient(@FlickrQualifier Cache cache) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(cache);
-
-        if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            builder.addInterceptor(loggingInterceptor);
-        }
 
         builder.addInterceptor(
                 chain -> {
@@ -76,6 +74,7 @@ public class FlickrApiModule {
                     HttpUrl url = originalHttpUrl.newBuilder()
                             .addQueryParameter(API_KEY, FLICKR_KEY)
                             .addQueryParameter(FORMAT, JSON)
+                            .addQueryParameter(NO_JSON_CALLBACK, "1")
                             .build();
 
                     Request.Builder requestBuilder = original.newBuilder()
@@ -87,17 +86,23 @@ public class FlickrApiModule {
         );
 
 
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(loggingInterceptor);
+        }
+
         return builder.build();
     }
 
     @Provides
     @ApplicationScope
     @FlickrQualifier
-    Retrofit provideRfetrofitStage(@FlickrQualifier OkHttpClient client, @FlickrQualifier Gson gson) {
+    Retrofit provideRfetrofitStage(@FlickrQualifier OkHttpClient client, @FlickrQualifier Moshi moshi) {
         return new Retrofit.Builder()
                 .baseUrl(FLICKR_URL)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 //                .validateEagerly(BuildConfig.DEBUG)
                 .build();

@@ -7,6 +7,7 @@ import com.example.kirill.weather.data.api.ApiError;
 import com.example.kirill.weather.data.api.flickr.models.FlickrResponse;
 import com.example.kirill.weather.data.api.flickr.models.InfoRest;
 import com.example.kirill.weather.data.api.flickr.models.PhotoRest;
+import com.example.kirill.weather.data.api.flickr.models.PhotosRest;
 
 import javax.inject.Inject;
 
@@ -24,7 +25,7 @@ public class FlickrApiService {
         this.flickr = flickr;
     }
 
-    public Observable<PhotoRest> search(String city) {
+    public Observable<PhotosRest> search(String city) {
         return flickr.search(city)
                 .onErrorResumeNext(throwable -> Observable.error(ApiError.from(throwable, app.getResources())))
                 .flatMap(this::handleApiResponse)
@@ -32,7 +33,7 @@ public class FlickrApiService {
                 ;
     }
 
-    public Observable<InfoRest> info(Integer photoId) {
+    public Observable<InfoRest> info(String photoId) {
         return flickr.info(photoId)
                 .onErrorResumeNext(throwable -> Observable.error(ApiError.from(throwable, app.getResources())))
                 .flatMap(this::handleApiResponse)

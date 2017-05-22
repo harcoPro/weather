@@ -2,10 +2,11 @@ package com.example.kirill.weather.data.api.flickr.models;
 
 
 import com.google.gson.annotations.SerializedName;
+import com.squareup.moshi.Json;
 
 public class InfoResponse extends FlickrResponse {
 
-    @SerializedName("photo")
+    @Json(name = "photo")
     public final InfoRest photo;
 
     public InfoResponse(String status,

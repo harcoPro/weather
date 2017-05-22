@@ -1,11 +1,11 @@
 package com.example.kirill.weather.data.api.flickr.models;
 
 
-import com.google.gson.annotations.SerializedName;
+import com.squareup.moshi.Json;
 
 public class PhotoUrlRest {
 
-    @SerializedName("_content")
+    @Json(name = "_content")
     public final String url;
 
     public PhotoUrlRest(String url) {
