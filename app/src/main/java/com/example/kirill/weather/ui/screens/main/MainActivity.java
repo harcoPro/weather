@@ -29,6 +29,8 @@ public class MainActivity extends BaseActivity implements MainView {
     @BindView(R.id.message_view)        MessageView                     messageView;
     @BindView(R.id.smoke_view)          View                            smoke;
 
+    private WeatherAdapter adapter;
+
     @InjectPresenter    MainPresenter   presenter;
 
     @ProvidePresenter
@@ -64,7 +66,9 @@ public class MainActivity extends BaseActivity implements MainView {
     public void obtainUserCitySuccess(String city) {
         pager.setVisibility(View.VISIBLE);
         tabs.setVisibility(View.VISIBLE);
-//        TODO implements update adapter here
+        adapter = new WeatherAdapter(getSupportFragmentManager(), city);
+        pager.setAdapter(adapter);
+        tabs.setupWithViewPager(pager);
     }
 
     @Override

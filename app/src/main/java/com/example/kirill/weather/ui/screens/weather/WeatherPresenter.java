@@ -16,7 +16,7 @@ import rx.Subscription;
 public class WeatherPresenter extends BasePresenter<WeatherView> {
 
     @Inject
-    private DataService dataService;
+    DataService dataService;
     private String city;
 
     public WeatherPresenter(@NonNull String city) {

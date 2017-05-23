@@ -49,6 +49,7 @@ public class MainPresenter extends BasePresenter<MainView> {
     }
 
     private void onError(Throwable throwable) {
+        throwable.printStackTrace();
         getViewState().finishObtainUserCity();
         getViewState().obtainUserCityFailed(throwable.getMessage());
     }
