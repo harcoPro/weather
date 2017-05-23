@@ -4,8 +4,8 @@ import android.app.Application;
 
 import com.example.kirill.weather.data.DataModule;
 import com.example.kirill.weather.data.DataService;
-import com.example.kirill.weather.data.api.flickr.FlickrApiModule;
-import com.example.kirill.weather.data.api.flickr.FlickrService;
+import com.example.kirill.weather.data.api.pixabay.PixabayApiModule;
+import com.example.kirill.weather.data.api.pixabay.PixabayApiService;
 import com.example.kirill.weather.data.api.weather.WeatherModule;
 import com.example.kirill.weather.data.api.weather.WeatherService;
 import com.example.kirill.weather.data.preferences.SPModule;
@@ -21,7 +21,7 @@ import ru.terrakok.cicerone.Router;
         modules = {
                 AppModule.class,
                 WeatherModule.class,
-                FlickrApiModule.class,
+                PixabayApiModule.class,
                 DataModule.class,
                 SPModule.class,
                 UiModule.class
@@ -46,7 +46,7 @@ public interface AppComponent extends CommonDependencies {
 
     Application application();
     WeatherService weatherService();
-    FlickrService flickrService();
+    PixabayApiService pixabayApiService();
     DataService dataService();
 
     Cicerone<Router> cicerone();

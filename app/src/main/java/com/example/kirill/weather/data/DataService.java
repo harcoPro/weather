@@ -7,6 +7,8 @@ import android.text.TextUtils;
 
 import com.example.kirill.weather.ApplicationScope;
 import com.example.kirill.weather.data.api.flickr.FlickrApiService;
+import com.example.kirill.weather.data.api.pixabay.PixabayApiService;
+import com.example.kirill.weather.data.api.pixabay.PixabayService;
 import com.example.kirill.weather.data.api.weather.WeatherService;
 import com.example.kirill.weather.data.api.weather.models.WeatherByCityNameResponse;
 import com.example.kirill.weather.ui.models.CityImage;
@@ -23,16 +25,16 @@ public class DataService {
 
     private final Application app;
     private final WeatherService weatherService;
-    private final FlickrApiService flickrService;
+    private final PixabayApiService pixabayApiService;
 
     @Inject
     public DataService(Application app,
                        WeatherService weatherService,
-                       FlickrApiService flickrService) {
+                       PixabayApiService pixabayApiService) {
 
         this.app = app;
         this.weatherService = weatherService;
-        this.flickrService = flickrService;
+        this.pixabayApiService = pixabayApiService;
     }
 
     public Observable<WeatherWithImage> getWeatherWithImageByCity(@NonNull String city) {
@@ -48,9 +50,9 @@ public class DataService {
     }
 
     public Observable<CityImage> getCityImage(String city) {
-        return flickrService
+        return pixabayApiService
                 .search(city)
-                .flatMap(rest -> flickrService.info(rest.photos.get(0).id))
+                .map(rest -> rest.get(0))
                 .map(CityImage::from)
                 ;
     }

@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.kirill.weather.R;
 import com.example.kirill.weather.ui.misc.MessageView;
 import com.example.kirill.weather.ui.models.WeatherWithImage;
@@ -81,7 +79,7 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     @Override
     public void loadingWeatherSuccess(WeatherWithImage weather) {
         Picasso.with(getContext())
-                .load("https://pixabay.com/get/eb34b80f2ef4003ed95c4518b7494292e377e0d004b0154890f5c27ba3e5bc_640.jpg")
+                .load(weather.cityImage.url)
                 .into(image);
 
         degrees.setText(weather.weather.temp + " " + weather.weather.description);

@@ -1,7 +1,9 @@
 package com.example.kirill.weather.ui.models;
 
 
-import com.example.kirill.weather.data.api.flickr.models.InfoRest;
+import android.text.TextUtils;
+
+import com.example.kirill.weather.data.api.pixabay.models.ImageRest;
 
 public class CityImage {
 
@@ -11,14 +13,14 @@ public class CityImage {
         this.url = url;
     }
 
-    public static CityImage from(InfoRest rest) {
-        if (rest.urlsRest.urls.size() > 0) {
-            return new CityImage(rest.urlsRest.urls.get(0).url);
+    public static CityImage from(ImageRest rest) {
+        if (!TextUtils.isEmpty(rest.webformatURL)) {
+            return new CityImage(rest.webformatURL);
         }
         return DEFAULT;
     }
 
 
-    public static final CityImage DEFAULT = new CityImage("https://www.flickr.com/photos/150543395@N06/34738934896/");
+    public static final CityImage DEFAULT = new CityImage("https://thumb7.shutterstock.com/display_pic_with_logo/73964/112514351/stock-photo-las-vegas-august-musical-fountains-at-bellagio-hotel-casino-on-august-in-las-vegas-112514351.jpg");
 
 }

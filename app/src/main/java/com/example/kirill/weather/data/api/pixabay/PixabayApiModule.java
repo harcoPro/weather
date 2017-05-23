@@ -1,59 +1,44 @@
-package com.example.kirill.weather.data.api.flickr;
+package com.example.kirill.weather.data.api.pixabay;
 
 import android.app.Application;
 
 import com.example.kirill.weather.ApplicationScope;
 import com.example.kirill.weather.BuildConfig;
-import com.example.kirill.weather.data.api.weather.WeatherQualifier;
-import com.example.kirill.weather.data.api.weather.WeatherService;
-import com.example.kirill.weather.data.preferences.qualifiers.LocaleQualifier;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.example.kirill.weather.data.api.flickr.FlickrQualifier;
+import com.example.kirill.weather.data.api.flickr.FlickrService;
 import com.squareup.moshi.Moshi;
-
-import java.io.IOException;
-
-import javax.inject.Inject;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
-import static android.provider.Settings.System.DATE_FORMAT;
-
 @Module
-public class FlickrApiModule {
+public class PixabayApiModule {
 
-    private static final String FLICKR_URL = "https://api.flickr.com/";
-    private static final String FLICKR_KEY = "577d1193f73f7909486aec520de3cdb8";
-    private static final String API_KEY = "api_key";
-    private static final String FORMAT = "format";
-    private static final String JSON = "json";
-    private static final String NO_JSON_CALLBACK = "nojsoncallback";
+    private static final String API_URL = "https://pixabay.com/";
+    private static final String FLICKR_KEY = "5440025-4746243edc124c2f2fdca485b";
+    private static final String API_KEY = "key";
 
 
     public static final int CACHE_SIZE = 10 * 1024 * 1024;      //10 Mib
 
     @Provides
     @ApplicationScope
-    @FlickrQualifier
+    @PixabayQualifier
     Cache provideCache(Application application) {
         return new Cache(application.getCacheDir(), CACHE_SIZE);
     }
 
     @Provides
     @ApplicationScope
-    @FlickrQualifier
+    @PixabayQualifier
     Moshi provideMoshi() {
         return new Moshi.Builder().build();
     }
@@ -61,8 +46,8 @@ public class FlickrApiModule {
 
     @Provides
     @ApplicationScope
-    @FlickrQualifier
-    OkHttpClient provideSimpleClient(@FlickrQualifier Cache cache) {
+    @PixabayQualifier
+    OkHttpClient provideSimpleClient(@PixabayQualifier Cache cache) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(cache);
 
@@ -73,8 +58,6 @@ public class FlickrApiModule {
 
                     HttpUrl url = originalHttpUrl.newBuilder()
                             .addQueryParameter(API_KEY, FLICKR_KEY)
-                            .addQueryParameter(FORMAT, JSON)
-                            .addQueryParameter(NO_JSON_CALLBACK, "1")
                             .build();
 
                     Request.Builder requestBuilder = original.newBuilder()
@@ -97,10 +80,10 @@ public class FlickrApiModule {
 
     @Provides
     @ApplicationScope
-    @FlickrQualifier
-    Retrofit provideRfetrofitStage(@FlickrQualifier OkHttpClient client, @FlickrQualifier Moshi moshi) {
+    @PixabayQualifier
+    Retrofit provideRfetrofitStage(@PixabayQualifier OkHttpClient client, @PixabayQualifier Moshi moshi) {
         return new Retrofit.Builder()
-                .baseUrl(FLICKR_URL)
+                .baseUrl(API_URL)
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -110,8 +93,8 @@ public class FlickrApiModule {
 
     @Provides
     @ApplicationScope
-    FlickrService provideWeatherService(@FlickrQualifier Retrofit retrofit) {
-        return retrofit.create(FlickrService.class);
+    PixabayService provideImageService(@PixabayQualifier Retrofit retrofit) {
+        return retrofit.create(PixabayService.class);
     }
 
 }

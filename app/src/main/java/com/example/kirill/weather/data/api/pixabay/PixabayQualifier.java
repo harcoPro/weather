@@ -1,4 +1,4 @@
-package com.example.kirill.weather.data.api.flickr;
+package com.example.kirill.weather.data.api.pixabay;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,5 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FlickrQualifier {
+public @interface PixabayQualifier {
 }
