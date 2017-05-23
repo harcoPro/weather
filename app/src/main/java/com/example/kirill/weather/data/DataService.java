@@ -35,22 +35,6 @@ public class DataService {
         this.flickrService = flickrService;
     }
 
-    public Observable<WeatherWithImage> getWeatherByLocation(Location location) {
-            return new ReactiveLocationProvider(app)
-                    .getReverseGeocodeObservable(location.getLatitude(), location.getLongitude(), 1)
-                    .flatMap(
-                            list -> {
-                                if (list.size() > 0 && !TextUtils.isEmpty(list.get(0).getLocality())) {
-                                    return Observable.just(list.get(0).getLocality());
-                                } else {
-                                    return Observable.error(new Throwable("Error obtained city name from location!"));
-                                }
-                            }
-                    )
-                    .flatMap(this::getWeatherWithImageByCity)
-                    ;
-    }
-
     public Observable<WeatherWithImage> getWeatherWithImageByCity(@NonNull String city) {
         return weatherService
                 .getWeatherByCityName(city)

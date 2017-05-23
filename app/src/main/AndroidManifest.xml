@@ -12,7 +12,7 @@
         android:name=".App"
         >
         <activity
-            android:name=".ui.screens.first.FirstActivity"
+            android:name=".ui.screens.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

@@ -6,30 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.kirill.weather.ui.screens.first.FirstActivity"
+    tools:context="com.example.kirill.weather.ui.screens.main.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <LinearLayout
-        android:id="@+id/first_screen_content"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:id="@+id/first_screen_city_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/first_screen_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
-    </LinearLayout>
+        />
 
     <include
         layout="@layout/smoke_view"
