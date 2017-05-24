@@ -4,11 +4,6 @@ import android.app.Application;
 
 import com.example.kirill.weather.ApplicationScope;
 import com.example.kirill.weather.data.api.ApiError;
-import com.example.kirill.weather.data.api.flickr.FlickrApiError;
-import com.example.kirill.weather.data.api.flickr.FlickrService;
-import com.example.kirill.weather.data.api.flickr.models.FlickrResponse;
-import com.example.kirill.weather.data.api.flickr.models.InfoRest;
-import com.example.kirill.weather.data.api.flickr.models.PhotosRest;
 import com.example.kirill.weather.data.api.pixabay.models.ImageRest;
 import com.example.kirill.weather.data.api.pixabay.models.PixabayResponse;
 

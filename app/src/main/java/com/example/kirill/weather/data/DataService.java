@@ -1,23 +1,17 @@
 package com.example.kirill.weather.data;
 
 import android.app.Application;
-import android.location.Location;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
 import com.example.kirill.weather.ApplicationScope;
-import com.example.kirill.weather.data.api.flickr.FlickrApiService;
 import com.example.kirill.weather.data.api.pixabay.PixabayApiService;
-import com.example.kirill.weather.data.api.pixabay.PixabayService;
 import com.example.kirill.weather.data.api.weather.WeatherService;
-import com.example.kirill.weather.data.api.weather.models.WeatherByCityNameResponse;
 import com.example.kirill.weather.ui.models.CityImage;
 import com.example.kirill.weather.ui.models.Weather;
 import com.example.kirill.weather.ui.models.WeatherWithImage;
 
 import javax.inject.Inject;
 
-import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
 import rx.Observable;
 
 @ApplicationScope
@@ -43,8 +37,8 @@ public class DataService {
                 .map(rest -> Weather.fromRest(rest, city))
                 .flatMap(
                         weather ->
-                        getCityImage(city)
-                        .map(image -> new WeatherWithImage(weather, image))
+                                getCityImage(city)
+                                        .map(image -> new WeatherWithImage(weather, image))
                 )
                 ;
     }

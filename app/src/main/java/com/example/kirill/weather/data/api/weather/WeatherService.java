@@ -1,18 +1,14 @@
 package com.example.kirill.weather.data.api.weather;
 
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
 import com.example.kirill.weather.ApplicationScope;
-import com.example.kirill.weather.data.api.flickr.FlickrApiError;
-import com.example.kirill.weather.data.api.flickr.models.FlickrResponse;
 import com.example.kirill.weather.data.api.weather.models.WeatherByCityNameResponse;
 import com.example.kirill.weather.data.api.weather.models.WeatherResponse;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.functions.Func1;
 
 @ApplicationScope
 public class WeatherService {

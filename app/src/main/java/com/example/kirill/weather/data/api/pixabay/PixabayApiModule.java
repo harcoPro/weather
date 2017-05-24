@@ -4,8 +4,6 @@ import android.app.Application;
 
 import com.example.kirill.weather.ApplicationScope;
 import com.example.kirill.weather.BuildConfig;
-import com.example.kirill.weather.data.api.flickr.FlickrQualifier;
-import com.example.kirill.weather.data.api.flickr.FlickrService;
 import com.squareup.moshi.Moshi;
 
 import dagger.Module;

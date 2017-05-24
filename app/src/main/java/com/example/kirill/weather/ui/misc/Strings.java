@@ -135,7 +135,6 @@ public class Strings {
         return strings;
     }
 
-
     /**
      * Method cleared string of non-printable characters
      *

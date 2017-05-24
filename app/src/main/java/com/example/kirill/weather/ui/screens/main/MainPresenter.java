@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.arellomobile.mvp.InjectViewState;
 import com.example.kirill.weather.App;
 import com.example.kirill.weather.data.DataService;
+import com.example.kirill.weather.ui.misc.LocationUtils;
 import com.example.kirill.weather.ui.misc.Utils;
 import com.example.kirill.weather.ui.mvp.BasePresenter;
 import com.google.android.gms.location.LocationRequest;
@@ -80,6 +81,8 @@ public class MainPresenter extends BasePresenter<MainView> {
     @SuppressWarnings("MissingPermission")
     private Observable<Location> getLocation(Boolean permissionGranted) {
         if (!permissionGranted) return Observable.error(new Throwable("For work application need location permissions!"));
+        if (!LocationUtils.isGpsEnabled(app)) return Observable.error(new Throwable("Check your GPS settings enabled"));
+
 
         LocationRequest request = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)

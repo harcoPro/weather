@@ -16,6 +16,8 @@ import com.example.kirill.weather.ui.misc.MessageView;
 import com.example.kirill.weather.ui.models.WeatherWithImage;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -63,6 +65,7 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     public void startLoadingWeather() {
         smoke.setVisibility(View.VISIBLE);
         messageView.setVisibility(View.GONE);
+        content.setVisibility(View.GONE);
     }
 
     @Override
@@ -78,11 +81,29 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
 
     @Override
     public void loadingWeatherSuccess(WeatherWithImage weather) {
+        content.setVisibility(View.VISIBLE);
+        degrees.setText(Formatter.weatherText(weather.weather.temp, weather.weather.description));
+
         Picasso.with(getContext())
                 .load(weather.cityImage.url)
                 .into(image);
+    }
 
-        degrees.setText(weather.weather.temp + " " + weather.weather.description);
+    private static class Formatter {
+
+        public static float convertKelvinToDegrees(float t) {
+            return t - 273f;
+        }
+
+        public static String weatherText(float t, String description) {
+            return String.format(
+                    Locale.getDefault(),
+                    "%.1f°C %s",
+                    convertKelvinToDegrees(t),
+                    description
+            );
+        }
+
     }
 
 }
