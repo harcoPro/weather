@@ -14,9 +14,9 @@ public class WeatherAdapter extends FragmentPagerAdapter {
 
     private List<String> items = new ArrayList<>();
 
-    public WeatherAdapter(FragmentManager fm, String city) {
+    public WeatherAdapter(FragmentManager fm, ArrayList<String> cities) {
         super(fm);
-        this.items.add(city);
+        update(cities);
     }
 
     @Override
@@ -39,11 +39,13 @@ public class WeatherAdapter extends FragmentPagerAdapter {
         return POSITION_NONE;
     }
 
-    public void addItem(String city) {
-        if (!items.contains(city)) {
-            items.add(city);
-            notifyDataSetChanged();
-        }
+    public void update(ArrayList<String> cities) {
+        items.clear();
+        items.addAll(cities);
+        notifyDataSetChanged();
     }
 
+    public int getLastItemPosition() {
+        return items.size() - 1;
+    }
 }

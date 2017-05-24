@@ -8,4 +8,7 @@
 
     <string name="message_view_refresh">Refresh</string>
 
+    <string name="city">Enter city</string>
+    <string name="city_form_error">Please inter correct city</string>
+
 </resources>

@@ -6,12 +6,14 @@ import android.text.TextUtils;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.kirill.weather.App;
-import com.example.kirill.weather.data.DataService;
+import com.example.kirill.weather.R;
 import com.example.kirill.weather.ui.misc.LocationUtils;
 import com.example.kirill.weather.ui.misc.Utils;
 import com.example.kirill.weather.ui.mvp.BasePresenter;
 import com.google.android.gms.location.LocationRequest;
 import com.tbruyelle.rxpermissions.RxPermissions;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -28,6 +30,7 @@ public class MainPresenter extends BasePresenter<MainView> {
     @Inject public Application app;
 
     public final RxPermissions permissions;
+    private ArrayList<String> cities = new ArrayList<>();
 
     public MainPresenter(RxPermissions rxPermissions) {
         this.permissions = rxPermissions;
@@ -56,8 +59,15 @@ public class MainPresenter extends BasePresenter<MainView> {
     }
 
     private void onResult(String city) {
+        addCity(city);
         getViewState().finishObtainUserCity();
-        getViewState().obtainUserCitySuccess(city);
+        getViewState().obtainUserCitySuccess(cities);
+    }
+
+    private void addCity(String city) {
+        if (!cities.contains(city)) {
+            cities.add(city);
+        }
     }
 
     private void getCity(Location location) {
@@ -95,6 +105,24 @@ public class MainPresenter extends BasePresenter<MainView> {
                 ;
     }
 
+    public void clickAdd(String city) {
+        getViewState().hideFormError();
 
+        if (TextUtils.isEmpty(city)) {
+            getViewState().showFormError(R.string.city_form_error);
+            return;
+        }
+
+        addCity(city.trim());
+        getViewState().updatePager(cities);
+    }
+
+    public void clickShowBottomSheet() {
+        getViewState().showAddCityView();
+    }
+
+    public void bottomHidden() {
+        getViewState().showPlusFab();
+    }
 
 }
