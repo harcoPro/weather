@@ -3,6 +3,15 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="message_view_text_size">16sp</dimen>
     <dimen name="first_screen_image_height">200dp</dimen>
+    <dimen name="bottom_sheet_margin">16dp</dimen>
+    <dimen name="bottom_sheet_card_radius">4dp</dimen>
+    <dimen name="bottom_sheet_padding">10dp</dimen>
+    <dimen name="bottom_sheet_elevation">5dp</dimen>
+
+    <dimen name="weather_card_margin">16dp</dimen>
+    <dimen name="weather_card_radius">4dp</dimen>
+    <dimen name="weather_card_padding">10dp</dimen>
+    <dimen name="weather_card_elevation">5dp</dimen>
 
 
 </resources>
