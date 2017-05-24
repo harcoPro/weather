@@ -21,6 +21,6 @@ public class CityImage {
     }
 
 
-    public static final CityImage DEFAULT = new CityImage("https://thumb7.shutterstock.com/display_pic_with_logo/73964/112514351/stock-photo-las-vegas-august-musical-fountains-at-bellagio-hotel-casino-on-august-in-las-vegas-112514351.jpg");
+    public static final CityImage DEFAULT = new CityImage("http://www.ehypermart.in/0/images/frontend/image-not-found.png");
 
 }

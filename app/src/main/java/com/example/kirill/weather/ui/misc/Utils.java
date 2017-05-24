@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.Random;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -24,5 +26,11 @@ public class Utils {
 				(InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		inputMethodManager.toggleSoftInputFromWindow(view.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
 	}
+
+	public static int random(int min, int max) {
+		Random r = new Random();
+		return r.nextInt(max - min) + min;
+	}
+
 
 }

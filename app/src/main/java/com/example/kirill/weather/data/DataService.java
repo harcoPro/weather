@@ -4,8 +4,10 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 
 import com.example.kirill.weather.ApplicationScope;
+import com.example.kirill.weather.data.api.pixabay.PixabayApiError;
 import com.example.kirill.weather.data.api.pixabay.PixabayApiService;
 import com.example.kirill.weather.data.api.weather.WeatherService;
+import com.example.kirill.weather.ui.misc.Utils;
 import com.example.kirill.weather.ui.models.CityImage;
 import com.example.kirill.weather.ui.models.Weather;
 import com.example.kirill.weather.ui.models.WeatherWithImage;
@@ -46,8 +48,16 @@ public class DataService {
     public Observable<CityImage> getCityImage(String city) {
         return pixabayApiService
                 .search(city)
-                .map(rest -> rest.get(0))
+                .map(rest -> rest.get(Utils.random(0, rest.size())))
                 .map(CityImage::from)
+                .onErrorResumeNext(throwable -> {
+                    if (throwable instanceof PixabayApiError) {
+                        PixabayApiError error = (PixabayApiError) throwable;
+                        if (error.code == 300)
+                            return Observable.just(CityImage.DEFAULT);
+                    }
+                    return Observable.error(throwable);
+                })
                 ;
     }
 
